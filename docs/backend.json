@@ -10,41 +10,24 @@
           "type": "string",
           "description": "Unique identifier for the user entity."
         },
-        "firstName": {
+        "name": {
           "type": "string",
-          "description": "The first name of the user."
-        },
-        "lastName": {
-          "type": "string",
-          "description": "The last name of the user."
+          "description": "The name of the user."
         },
         "email": {
           "type": "string",
           "description": "The email address of the user.",
           "format": "email"
         },
-        "profilePicture": {
+        "photoURL": {
           "type": "string",
           "description": "URL of the user's profile picture.",
           "format": "uri"
-        },
-        "address": {
-          "type": "string",
-          "description": "The address of the user."
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "The phone number of the user."
-        },
-        "isSeller": {
-          "type": "boolean",
-          "description": "Indicates whether the user is also a seller."
         }
       },
       "required": [
         "id",
-        "firstName",
-        "lastName",
+        "name",
         "email"
       ]
     }
@@ -52,7 +35,7 @@
   "auth": {
     "providers": [
       "password",
-      "anonymous"
+      "google.com"
     ]
   },
   "firestore": {

@@ -16,6 +16,8 @@ import { CartSheet } from '@/components/cart/CartSheet';
 import { useCart } from '@/hooks/use-cart';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { useRouter } from 'next/navigation';
 
 const navLinks = [
   { href: '/products', label: 'Shop' },
@@ -23,9 +25,15 @@ const navLinks = [
 ];
 
 export function Header() {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, appUser, logout } = useAuth();
   const { itemCount } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
+  
+  const handleLogout = async () => {
+    await logout();
+    router.push('/');
+  }
 
   return (
     <header className="bg-background/80 sticky top-0 z-40 w-full border-b backdrop-blur-sm">
@@ -43,7 +51,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-4">
-            <AuthControl />
+            <AuthControl isAuthenticated={isAuthenticated} user={appUser} logout={handleLogout} />
             <CartControl />
           </div>
           <div className="md:hidden">
@@ -73,7 +81,7 @@ export function Header() {
                     ))}
                   </nav>
                   <div className="mt-auto border-t pt-6 flex flex-col gap-4">
-                     <AuthControl />
+                     <AuthControl isAuthenticated={isAuthenticated} user={appUser} logout={handleLogout} />
                      <CartControl isMobile />
                   </div>
                 </div>
@@ -86,15 +94,16 @@ export function Header() {
   );
 }
 
-function AuthControl() {
-  const { isAuthenticated, user, logout } = useAuth();
-  return isAuthenticated ? (
+function AuthControl({isAuthenticated, user, logout} : {isAuthenticated: boolean, user: any, logout: () => void}) {
+  return isAuthenticated && user ? (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full">
-          <User className="h-5 w-5" />
-          <span className="sr-only">User Menu</span>
-        </Button>
+        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={user.photoURL || ''} alt={user.name || ''} />
+              <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+            </Avatar>
+          </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem asChild>

@@ -11,6 +11,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/components/auth/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import { useEffect } from 'react';
+import { Separator } from '@/components/ui/separator';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -19,7 +21,7 @@ const loginSchema = z.object({
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, loginWithGoogle, isAuthenticated } = useAuth();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -27,15 +29,18 @@ export default function LoginPage() {
     defaultValues: { email: '', password: '' },
   });
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      toast({
+        title: 'Welcome back!',
+        description: "You've been successfully logged in.",
+      });
+      router.push('/profile');
+    }
+  }, [isAuthenticated, router, toast]);
+
   function onSubmit(values: z.infer<typeof loginSchema>) {
-    // In a real app, you'd call your auth API here.
-    // For this mock-up, we'll just log the user in.
-    login(values.email, 'Jane Doe');
-    toast({
-      title: 'Welcome back!',
-      description: "You've been successfully logged in.",
-    });
-    router.push('/profile');
+    login(values.email, values.password);
   }
 
   return (
@@ -79,6 +84,10 @@ export default function LoginPage() {
               </Button>
             </form>
           </Form>
+          <Separator className="my-4" />
+           <Button variant="outline" className="w-full" onClick={loginWithGoogle}>
+            Login with Google
+          </Button>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{' '}
             <Link href="/signup" className="underline hover:text-primary">

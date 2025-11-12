@@ -3,14 +3,17 @@
 import { AuthProvider } from '@/components/auth/AuthContext';
 import { CartProvider } from '@/hooks/use-cart';
 import { Toaster } from '@/components/ui/toaster';
+import { FirebaseClientProvider } from '@/firebase';
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <AuthProvider>
-      <CartProvider>
-        {children}
-        <Toaster />
-      </CartProvider>
-    </AuthProvider>
+    <FirebaseClientProvider>
+      <AuthProvider>
+        <CartProvider>
+          {children}
+          <Toaster />
+        </CartProvider>
+      </AuthProvider>
+    </FirebaseClientProvider>
   );
 }

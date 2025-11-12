@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/components/auth/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import { useEffect } from 'react';
 
 const signupSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -20,7 +21,7 @@ const signupSchema = z.object({
 
 export default function SignupPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { signup, isAuthenticated } = useAuth();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof signupSchema>>({
@@ -28,15 +29,18 @@ export default function SignupPage() {
     defaultValues: { name: '', email: '', password: '' },
   });
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      toast({
+        title: 'Account Created!',
+        description: "Welcome to Cozy Corners. We're glad you're here.",
+      });
+      router.push('/profile');
+    }
+  }, [isAuthenticated, router, toast]);
+
   function onSubmit(values: z.infer<typeof signupSchema>) {
-    // In a real app, you'd call your auth API to create a new user.
-    // For this mock-up, we'll just log them in.
-    login(values.email, values.name);
-    toast({
-      title: 'Account Created!',
-      description: "Welcome to Cozy Corners. We're glad you're here.",
-    });
-    router.push('/profile');
+    signup(values.name, values.email, values.password);
   }
 
   return (

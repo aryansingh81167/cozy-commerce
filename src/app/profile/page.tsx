@@ -11,31 +11,40 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 
 export default function ProfilePage() {
-  const { user, isAuthenticated } = useAuth();
+  const { appUser, isUserLoading, isAuthenticated } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isUserLoading && !isAuthenticated) {
       router.push('/login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, isUserLoading, router]);
 
-  if (!user) {
-    return null; // or a loading spinner
+  if (isUserLoading || !appUser) {
+    return (
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <h1 className="text-4xl font-headline mb-4">Loading...</h1>
+      </div>
+    );
   }
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-4xl font-headline mb-8">Welcome, {user.name}</h1>
+      <h1 className="text-4xl font-headline mb-8">Welcome, {appUser.name}</h1>
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-1">
           <Card>
             <CardHeader>
               <CardTitle className="font-headline">Your Profile</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p><strong>Name:</strong> {user.name}</p>
-              <p><strong>Email:</strong> {user.email}</p>
+            <CardContent className="flex flex-col items-center gap-4">
+              {appUser.photoURL && (
+                <Image src={appUser.photoURL} alt={appUser.name || 'User'} width={80} height={80} className="rounded-full" />
+              )}
+              <div className="text-center">
+                <p><strong>Name:</strong> {appUser.name}</p>
+                <p><strong>Email:</strong> {appUser.email}</p>
+              </div>
             </CardContent>
           </Card>
         </div>

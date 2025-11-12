@@ -39,8 +39,9 @@ export type CartItem = {
 
 export type User = {
   id: string;
-  name: string;
-  email: string;
+  name: string | null;
+  email: string | null;
+  photoURL?: string | null;
 };
 
 export type Order = {
