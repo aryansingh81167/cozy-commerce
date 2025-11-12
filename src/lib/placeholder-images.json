@@ -1,3 +1,64 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "heroImage",
+      "description": "A stylish and cozy living room with modern furniture and decor.",
+      "imageUrl": "https://images.unsplash.com/photo-1681081108013-9b029f2a944e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb3p5JTIwbGl2aW5ncm9vbXxlbnwwfHx8fDE3NjI5MzQ4MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cozy livingroom"
+    },
+    {
+      "id": "productVase",
+      "description": "A minimalist terracotta ceramic vase.",
+      "imageUrl": "https://images.unsplash.com/photo-1643569556871-91ec60671ed7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjZXJhbWljJTIwdmFzZXxlbnwwfHx8fDE3NjI4MjgxNjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ceramic vase"
+    },
+    {
+      "id": "productCushions",
+      "description": "A set of two soft linen cushions in neutral tones.",
+      "imageUrl": "https://images.unsplash.com/photo-1605742055648-d52e55d2f9bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsaW5lbiUyMGN1c2hpb25zfGVufDB8fHx8MTc2MjkzNDgwNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "linen cushions"
+    },
+    {
+      "id": "productArt",
+      "description": "Abstract wall art with geometric patterns.",
+      "imageUrl": "https://images.unsplash.com/photo-1618331833071-ce81bd50d300?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGFydHxlbnwwfHx8fDE3NjI4NzczMzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract art"
+    },
+    {
+      "id": "productLamp",
+      "description": "A modern desk lamp with a wooden base.",
+      "imageUrl": "https://images.unsplash.com/photo-1526040652367-ac003a0475fe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkZXNrJTIwbGFtcHxlbnwwfHx8fDE3NjI5MDM0OTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "desk lamp"
+    },
+    {
+      "id": "productPlant",
+      "description": "A small potted succulent in a ceramic pot.",
+      "imageUrl": "https://images.unsplash.com/photo-1537039557108-4a42c334fd5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwb3R0ZWQlMjBwbGFudHxlbnwwfHx8fDE3NjI4NjU5Njh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "potted plant"
+    },
+    {
+      "id": "productMirror",
+      "description": "A round wall mirror with a thin brass frame.",
+      "imageUrl": "https://images.unsplash.com/photo-1617228206053-477863025d9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3YWxsJTIwbWlycm9yfGVufDB8fHx8MTc2MjkzNDgwNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "wall mirror"
+    },
+    {
+      "id": "productRug",
+      "description": "A woven area rug with a subtle pattern.",
+      "imageUrl": "https://images.unsplash.com/photo-1644977624606-4f7dc0093e7e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhcmVhJTIwcnVnfGVufDB8fHx8MTc2MjkzNDgwNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "area rug"
+    },
+    {
+      "id": "productCandles",
+      "description": "A set of three scented soy candles in glass jars.",
+      "imageUrl": "https://images.unsplash.com/photo-1603905179139-db12ab535ca9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzY2VudGVkJTIwY2FuZGxlc3xlbnwwfHx8fDE3NjI4NTYwMjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "scented candles"
+    },
+    {
+      "id": "userAvatar",
+      "description": "A generic user avatar.",
+      "imageUrl": "https://images.unsplash.com/photo-1569913486515-b74bf7751574?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwZXJzb24lMjBhdmF0YXJ8ZW58MHx8fHwxNzYyODQ2MTgwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person avatar"
+    }
+  ]
 }
