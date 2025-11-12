@@ -66,7 +66,7 @@ export function ARView({ product }: { product: Product }) {
           {/* We only render the model-viewer on the client after the dialog is open */}
           {isOpen && (
             <model-viewer
-              src="https://modelviewer.dev/shared-assets/models/Chair.glb"
+              src="https://modelviewer.dev/static/ShopifyModels/Chair.glb"
               alt={`3D model of ${product.name}`}
               ar
               ar-modes="webxr scene-viewer quick-look"
