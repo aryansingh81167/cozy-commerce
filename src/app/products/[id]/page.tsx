@@ -7,6 +7,7 @@ import { Star, StarHalf } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { AddToCartButton } from './_components/AddToCartButton';
 import { RecommendedProducts } from './_components/RecommendedProducts';
+import { ARView } from './_components/ARView';
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const product = products.find(p => p.id === params.id);
@@ -58,8 +59,9 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           <p className="mt-4 text-3xl font-semibold">${product.price.toFixed(2)}</p>
           <p className="mt-6 text-muted-foreground">{product.longDescription}</p>
 
-          <div className="mt-8">
+          <div className="mt-8 flex flex-col md:flex-row gap-4">
             <AddToCartButton product={product} />
+            <ARView product={product} />
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
             {product.stock > 0 ? `${product.stock} items in stock` : 'Out of stock'}
