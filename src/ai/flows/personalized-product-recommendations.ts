@@ -25,7 +25,12 @@ export type PersonalizedRecommendationsOutput = z.infer<typeof PersonalizedRecom
 export async function getPersonalizedRecommendations(
   input: PersonalizedRecommendationsInput
 ): Promise<PersonalizedRecommendationsOutput> {
-  return personalizedRecommendationsFlow(input);
+  const result = await personalizedRecommendationsFlow(input);
+  // Ensure we always return an object that matches the output schema
+  if (typeof result?.recommendations === 'string') {
+    return result;
+  }
+  return { recommendations: '' };
 }
 
 const prompt = ai.definePrompt({
