@@ -14,13 +14,15 @@ export async function RecommendedProducts({ currentProductId }: { currentProduct
 
     const result = await getPersonalizedRecommendations({ userHistory, productCatalog });
     
-    // Basic parsing: assumes AI returns a comma-separated list of product names
-    const recommendedProductNames = result.recommendations.split('\n').map(s => s.replace(/^- /, '').trim());
+    // Basic parsing: assumes AI returns a newline-separated list of product names
+    const recommendedProductNames = result.recommendations?.split('\n').map(s => s.replace(/^- /, '').trim()).filter(Boolean) || [];
 
-    const recommendedProducts = products.filter(p => recommendedProductNames.some(name => p.name.includes(name) || name.includes(p.name)));
+    const recommendedProducts = recommendedProductNames.length > 0
+      ? products.filter(p => recommendedProductNames.some(name => p.name.includes(name) || name.includes(p.name)))
+      : [];
 
     if (recommendedProducts.length === 0) {
-      // Fallback: Show a few other popular products if AI fails or returns nothing useful
+      // Fallback: Show a few other popular products if AI returns no useful recommendations
       const fallbackProducts = products.filter(p => p.id !== currentProductId).slice(0, 4);
       return <FallbackProducts products={fallbackProducts} />;
     }
@@ -36,7 +38,7 @@ export async function RecommendedProducts({ currentProductId }: { currentProduct
       </section>
     );
   } catch (error) {
-    console.error("Failed to get AI recommendations:", error);
+    console.error("Failed to get AI recommendations:", error instanceof Error ? error.message : String(error));
     // Render a fallback if the AI call fails
     const fallbackProducts = products.filter(p => p.id !== currentProductId).slice(0, 4);
     return <FallbackProducts products={fallbackProducts} />;
