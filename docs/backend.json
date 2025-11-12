@@ -1,0 +1,79 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user account within the Cozy Commerce application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user entity."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The first name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The last name of the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the user.",
+          "format": "email"
+        },
+        "profilePicture": {
+          "type": "string",
+          "description": "URL of the user's profile picture.",
+          "format": "uri"
+        },
+        "address": {
+          "type": "string",
+          "description": "The address of the user."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number of the user."
+        },
+        "isSeller": {
+          "type": "boolean",
+          "description": "Indicates whether the user is also a seller."
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profile data. Only the authenticated user can read/write their own document. Uses Firebase Authentication's `uid` as the document ID.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user, corresponding to the Firebase Authentication UID."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This Firestore structure prioritizes security, scalability, and debuggability, adhering to the core design principles of Authorization Independence, Clarity of Intent, DBAC, and QAPs. It uses path-based ownership for user data and avoids hierarchical authorization dependencies by ensuring all collections have homogeneous security postures.\n\nThe structure is designed around the `User` entity. User-specific data is stored under `/users/{userId}`. This provides simple path-based ownership, where only the authenticated user can access their data. The `users` collection utilizes the standard user id provided by Firebase Authentication (via `request.auth.uid`).\n\nAuthorization Independence (Denormalization):\nThis design achieves authorization independence by storing authorization relevant data directly within the documents where it's needed, avoiding `get()` calls in security rules. In this basic implementation, since there are no collaborative documents, denormalization isn't explicitly needed. If collaborative features are added later (e.g., shared wishlists), a `members` map on those documents would be used to denormalize access control.\n\nQAPs (Rules are not Filters):\nThe path-based structure (e.g., `/users/{userId}/...`) inherently supports secure `list` operations. Rules can easily grant access to a user to list documents under their own user ID without exposing other users' data.  Because all documents under `/users/{userId}` belong to the user, a simple rule can allow `list` access based on `request.auth.uid == userId`."
+  }
+}
