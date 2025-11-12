@@ -57,6 +57,7 @@ export const products: Product[] = [
     rating: 4.9,
     reviewCount: 180,
     stock: 30,
+    modelSrc: '/models/desk-lamp.glb',
   },
   {
     id: '5',

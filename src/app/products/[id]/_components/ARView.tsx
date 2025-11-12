@@ -46,6 +46,12 @@ declare global {
 
 export function ARView({ product }: { product: Product }) {
   const [isOpen, setIsOpen] = useState(false);
+  
+  if (!product.modelSrc) {
+    return null; // Don't render the button if there's no model
+  }
+
+  const modelSrc = product.modelSrc || "https://modelviewer.dev/shared-assets/models/Astronaut.glb";
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -66,7 +72,7 @@ export function ARView({ product }: { product: Product }) {
           {/* We only render the model-viewer on the client after the dialog is open */}
           {isOpen && (
             <model-viewer
-              src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+              src={modelSrc}
               alt={`3D model of ${product.name}`}
               ar
               ar-modes="webxr scene-viewer quick-look"
