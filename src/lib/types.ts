@@ -7,6 +7,7 @@ export type Product = {
   longDescription: string;
   price: number;
   images: string[];
+  modelSrc?: string; // Optional: URL to the 3D model
   categoryId: string;
   rating: number;
   reviewCount: number;
