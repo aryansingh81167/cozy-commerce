@@ -36,7 +36,7 @@ export function Header() {
   }
 
   return (
-    <header className="bg-background/80 sticky top-0 z-40 w-full border-b backdrop-blur-sm">
+    <header className="bg-card/80 sticky top-0 z-40 w-full border-b backdrop-blur-sm">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
           <Sofa className="h-8 w-8 text-primary" />
@@ -44,7 +44,7 @@ export function Header() {
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map(link => (
-            <Link key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+            <Link key={link.href} href={link.href} className="text-sm font-medium text-foreground transition-colors hover:text-primary">
               {link.label}
             </Link>
           ))}
@@ -115,7 +115,7 @@ function AuthControl({isAuthenticated, user, logout} : {isAuthenticated: boolean
       </DropdownMenuContent>
     </DropdownMenu>
   ) : (
-    <Button asChild variant="ghost" size="sm">
+    <Button asChild variant="default" size="sm">
       <Link href="/login">Login</Link>
     </Button>
   );
