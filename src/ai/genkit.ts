@@ -1,11 +1,11 @@
-import { genkit } from "genkit";
-import { googleAI } from "@genkit-ai/google-genai";
+import { genkit } from 'genkit';
+import { googleAI } from '@genkit-ai/google-genai';
 
-const hasGeminiKey = !!process.env.GOOGLE_GENAI_API_KEY;
+const hasGeminiKey = !!process.env.GEMINI_API_KEY;
 
 export const ai = hasGeminiKey
   ? genkit({
       plugins: [googleAI()],
-      model: "googleai/gemini-2.5-flash",
+      model: 'googleai/gemini-2.5-flash',
     })
   : null;
